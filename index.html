@@ -46,7 +46,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -69,98 +69,130 @@
             --radius-lg: 24px;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { -webkit-text-size-adjust: 100%; }
-        body { font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; color: var(--text); background: var(--white); font-size: 16px; -webkit-font-smoothing: antialiased; min-height: 100dvh; display: flex; flex-direction: column; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body { font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.8; color: var(--text); background: var(--white); font-size: 16px; -webkit-font-smoothing: antialiased; min-height: 100dvh; display: flex; flex-direction: column; }
+        img { max-width: 100%; height: auto; }
         a { color: inherit; text-decoration: none; }
 
         /* HEADER */
-        .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(27,46,92,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: none; z-index: 1000; }
-        .nav { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; color: var(--primary); }
+        .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(27,46,92,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: none; z-index: 1000; transition: box-shadow 0.3s; }
+        .header.scrolled { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .nav { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 72px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.25rem; color: var(--white); }
         .logo img { flex-shrink: 0; }
-        .nav-links { display: flex; list-style: none; gap: 4px; }
-        .nav-links a { display: block; padding: 8px 14px; font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.85); border-radius: 8px; transition: color 0.2s, background 0.2s; }
-        .nav-links a:hover { color: #FFFFFF; background: rgba(255,255,255,0.12); }
-        .nav-cta { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; background: var(--accent); color: var(--white) !important; border-radius: 50px; font-weight: 600; font-size: 0.88rem; transition: background 0.2s; }
-        .nav-cta:hover { background: #B8943D; }
-        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; color: #FFFFFF; }
+        .nav-links { display: flex; list-style: none; gap: 8px; }
+        .nav-links a { display: block; padding: 8px 16px; font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.85); border-radius: 8px; transition: color 0.2s, background 0.2s; }
+        .nav-links a:hover, .nav-links a:focus-visible { color: #FFFFFF; background: rgba(255,255,255,0.12); }
+        .nav-cta { display: inline-flex; align-items: center; gap: 6px; padding: 10px 24px; background: var(--accent); color: var(--white) !important; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: background 0.2s, transform 0.2s; }
+        .nav-cta:hover { background: #B8943D; transform: translateY(-1px); }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; border-radius: 8px; color: #FFFFFF; }
+        .hamburger:hover { background: rgba(255,255,255,0.12); }
         .hamburger svg { display: block; }
 
         /* MOBILE MENU */
         .mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 999; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.3s, visibility 0.3s; }
         .mobile-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
-        .mobile-menu { display: none; position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: var(--white); z-index: 1001; padding: 72px 24px 24px; transition: right 0.3s ease; box-shadow: var(--shadow-lg); }
+        .mobile-menu { display: none; position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: var(--white); z-index: 1001; padding: 80px 24px 24px; transition: right 0.3s ease; box-shadow: var(--shadow-lg); }
         .mobile-menu.active { right: 0; }
-        .mobile-menu a { display: block; padding: 14px 16px; font-size: 1rem; font-weight: 500; color: var(--text); border-radius: 8px; margin-bottom: 4px; }
-        .mobile-menu .mobile-cta { text-align: center; margin-top: 16px; padding: 14px; background: var(--accent); color: var(--white); border-radius: 12px; font-weight: 600; }
-        .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; padding: 8px; color: var(--text-muted); }
+        .mobile-menu a { display: block; padding: 14px 16px; font-size: 1rem; font-weight: 500; color: var(--text); border-radius: 8px; margin-bottom: 4px; transition: background 0.2s; }
+        .mobile-menu a:hover { background: var(--accent-light); color: var(--primary); }
+        .mobile-menu .mobile-cta { display: block; text-align: center; margin-top: 16px; padding: 14px; background: var(--accent); color: var(--white); border-radius: 12px; font-weight: 600; }
+        .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; padding: 8px; border-radius: 8px; color: var(--text-muted); }
 
-        /* HERO — compact */
-        .hero { padding: 88px 24px 32px; background: linear-gradient(160deg, var(--accent-light) 0%, var(--white) 60%, var(--primary-light) 100%); text-align: center; }
-        .hero h1 { font-size: clamp(1.5rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+        /* HERO */
+        .hero { padding: 120px 24px 64px; background: linear-gradient(160deg, var(--accent-light) 0%, var(--white) 60%, var(--primary-light) 100%); text-align: center; }
+        .hero h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.4; margin-bottom: 12px; }
         .hero h1 em { font-style: normal; color: var(--accent); }
-        .hero p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; }
+        .hero p { font-size: 1rem; color: var(--text-muted); margin-bottom: 0; }
+
+        /* WAVE DIVIDER — hero gradient to white services bg */
+        .wave-divider { margin-top: -1px; line-height: 0; overflow: hidden; background: var(--white); }
+        .wave-divider svg { width: 100%; height: 60px; display: block; }
 
         /* SERVICE CARDS */
-        .services { padding: 28px 24px 40px; max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        .svc { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 20px 24px; transition: box-shadow 0.25s, transform 0.25s; }
+        .services { padding: 32px 24px 56px; max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .svc { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 24px 28px; transition: box-shadow 0.25s, transform 0.25s; }
         .svc:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-        .svc-icon { width: 56px; height: 56px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .svc-icon { width: 56px; height: 56px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
         .svc-icon svg { width: 28px; height: 28px; color: var(--accent); }
-        .svc h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
-        .svc p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; flex: 1; }
-        .svc-link { font-size: 0.88rem; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 4px; }
+        .svc h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+        .svc p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; flex: 1; }
+        .svc-link { font-size: 0.9rem; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 4px; }
+
+        /* CTA SECTION */
+        .cta-section { padding: 72px 24px; text-align: center; background: linear-gradient(160deg, var(--accent-light), var(--primary-light)); }
+        .cta-section h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 700; margin-bottom: 16px; }
+        .cta-section p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 32px; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: all 0.2s; border: none; cursor: pointer; font-family: inherit; }
+        .btn-primary { background: var(--accent); color: var(--white); box-shadow: 0 4px 16px rgba(197,165,90,0.3); }
+        .btn-primary:hover { background: #B8943D; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(197,165,90,0.35); }
 
         /* FOOTER */
-        .footer { background: var(--primary); color: rgba(255,255,255,0.7); padding: 40px 24px 24px; margin-top: auto; }
-        .footer-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 28px; }
-        .footer-brand .logo { color: var(--white); margin-bottom: 8px; }
-        .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
-        .footer-nav h4, .footer-contact h4 { color: var(--white); font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; }
-        .footer-nav a { display: block; padding: 3px 0; font-size: 0.85rem; transition: color 0.2s; }
+        .footer { background: var(--primary); color: rgba(255,255,255,0.7); padding: 56px 24px 32px; margin-top: auto; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+        .footer-brand .logo { color: var(--white); margin-bottom: 12px; }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.8; }
+        .footer-nav h4, .footer-contact h4 { color: var(--white); font-size: 0.9rem; font-weight: 600; margin-bottom: 16px; }
+        .footer-nav a { display: block; padding: 4px 0; font-size: 0.9rem; transition: color 0.2s; }
         .footer-nav a:hover { color: var(--white); }
-        .footer-contact p { font-size: 0.85rem; margin-bottom: 6px; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.78rem; max-width: 960px; margin: 0 auto; }
+        .footer-contact p { font-size: 0.9rem; margin-bottom: 8px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; font-size: 0.8rem; max-width: 1100px; margin: 0 auto; }
+
+        /* SCROLL TOP */
+        .scroll-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: var(--white); border: none; font-size: 20px; cursor: pointer; z-index: 900; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { background: #B8943D; transform: translateY(-2px); }
+
+        /* ANIMATIONS */
+        .animate { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .animate.in { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .animate { opacity: 1; transform: none; transition: none; } }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .nav-links, .nav .nav-cta { display: none; }
             .hamburger { display: block; }
-            .mobile-menu { display: block; }
+            .mobile-overlay, .mobile-menu { display: block; }
             .services { grid-template-columns: 1fr; max-width: 400px; }
-            .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+            .footer-inner { grid-template-columns: 1fr; gap: 32px; }
         }
         @media (max-width: 480px) {
-            .hero { padding: 80px 16px 24px; }
-            .services { padding: 20px 16px 32px; }
+            .hero { padding: 108px 16px 48px; }
+            .services { padding: 24px 16px 40px; }
+            .cta-section { padding: 56px 16px; }
+            .btn { width: 100%; justify-content: center; }
         }
+        @media print { .header, .scroll-top, .mobile-menu, .mobile-overlay { display: none !important; } .animate { opacity: 1 !important; transform: none !important; } }
     </style>
 </head>
 <body>
 
     <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <a href="index.html" class="logo">
+    <header class="header" role="banner">
+        <nav class="nav" aria-label="メインナビゲーション">
+            <a href="index.html" class="logo" aria-label="ハッピーベル トップページ">
                 <img src="logo.jpg" alt="ハッピーベル" height="40" style="flex-shrink:0;">
                 ハッピーベル
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" role="list">
                 <li><a href="about.html">会社概要</a></li>
                 <li><a href="service-kaigo.html">介護施設サポート</a></li>
                 <li><a href="service-yakkyoku.html">調剤薬局支援</a></li>
                 <li><a href="service-kenshu.html">研修サービス</a></li>
             </ul>
-            <a href="contact.html" class="nav-cta">お問い合わせ</a>
+            <a href="contact.html" class="nav-cta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                お問い合わせ
+            </a>
             <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
         </nav>
     </header>
 
     <!-- Mobile Menu -->
-    <div class="mobile-overlay"></div>
-    <div class="mobile-menu">
+    <div class="mobile-overlay" aria-hidden="true"></div>
+    <div class="mobile-menu" role="dialog" aria-label="モバイルメニュー">
         <button class="mobile-close" aria-label="メニューを閉じる">✕</button>
         <a href="index.html">ホーム</a>
         <a href="about.html">会社概要</a>
@@ -172,16 +204,16 @@
 
     <!-- Hero -->
     <section class="hero">
-        <h1>介護・薬局経営の課題を<br><em>現場目線</em>で解決</h1>
-        <p>合同会社ハッピーベル — 埼玉県を拠点に関東エリア対応</p>
+        <h1 class="animate">介護・薬局経営の課題を<br><em>現場目線</em>で解決</h1>
+        <p class="animate">合同会社ハッピーベル — 埼玉県を拠点に関東エリア対応</p>
     </section>
 
     <!-- Wave divider -->
-    <div style="margin-top:-1px;line-height:0;overflow:hidden;"><svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;display:block;"><path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,0 L0,0 Z" fill="#FFF8F0" opacity="0.5"/><path d="M0,30 C240,70 480,10 720,40 C960,70 1200,10 1440,30 L1440,0 L0,0 Z" fill="#FFF8F0"/></svg></div>
+    <div class="wave-divider"><svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,0 L0,0 Z" fill="var(--primary-light)" opacity="0.5"/><path d="M0,30 C240,70 480,10 720,40 C960,70 1200,10 1440,30 L1440,0 L0,0 Z" fill="var(--accent-light)"/></svg></div>
 
     <!-- Services -->
     <div class="services">
-        <a href="service-kaigo.html" class="svc">
+        <a href="service-kaigo.html" class="svc animate">
             <div class="svc-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             </div>
@@ -189,7 +221,7 @@
             <p>稼働率向上・人材定着・報酬適正化など、施設経営の課題を実践的に改善します。</p>
             <span class="svc-link">詳しく見る →</span>
         </a>
-        <a href="service-yakkyoku.html" class="svc">
+        <a href="service-yakkyoku.html" class="svc animate">
             <div class="svc-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             </div>
@@ -197,7 +229,7 @@
             <p>報酬改定対応・業務フロー改善・かかりつけ薬局化を総合的にサポートします。</p>
             <span class="svc-link">詳しく見る →</span>
         </a>
-        <a href="service-kenshu.html" class="svc">
+        <a href="service-kenshu.html" class="svc animate">
             <div class="svc-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
             </div>
@@ -207,8 +239,17 @@
         </a>
     </div>
 
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2 class="animate">お気軽にご相談ください</h2>
+        <p class="animate">初回相談は無料です。どんな小さなお悩みでもお聞かせください。</p>
+        <div class="animate">
+            <a href="contact.html" class="btn btn-primary">お問い合わせはこちら</a>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer-inner">
             <div class="footer-brand">
                 <div class="logo">
@@ -229,6 +270,7 @@
             <div class="footer-contact">
                 <h4>お問い合わせ</h4>
                 <p>〒367-0244<br>埼玉県児玉郡神川町<br>大字八日市649番地5</p>
+                <!-- TODO: 実際の連絡先に差し替え -->
                 <p>TEL: 0495-XX-XXXX</p>
                 <p>Mail: info@happy-bell.co.jp</p>
             </div>
@@ -238,8 +280,22 @@
         </div>
     </footer>
 
+    <button class="scroll-top" aria-label="ページ上部に戻る">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
     <script>
     (function() {
+        'use strict';
+        var header = document.querySelector('.header');
+        var scrollTopBtn = document.querySelector('.scroll-top');
+        window.addEventListener('scroll', function() {
+            var y = window.pageYOffset;
+            header.classList.toggle('scrolled', y > 50);
+            scrollTopBtn.classList.toggle('visible', y > 400);
+        }, { passive: true });
+        scrollTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
         var hamburger = document.querySelector('.hamburger');
         var overlay = document.querySelector('.mobile-overlay');
         var menu = document.querySelector('.mobile-menu');
@@ -250,8 +306,13 @@
         overlay.addEventListener('click', shut);
         close.addEventListener('click', shut);
         menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', shut); });
+
+        var animEls = document.querySelectorAll('.animate');
+        if ('IntersectionObserver' in window) {
+            var obs = new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting) { entry.target.classList.add('in'); obs.unobserve(entry.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            animEls.forEach(function(el) { obs.observe(el); });
+        } else { animEls.forEach(function(el) { el.classList.add('in'); }); }
     })();
     </script>
 </body>
 </html>
-
