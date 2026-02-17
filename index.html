@@ -51,18 +51,22 @@
     <style>
         :root {
             --primary: #1B2E5C;
-            --primary-light: #E8EBF2;
+            --primary-light: #EDF1F7;
             --primary-dark: #0F1D3D;
             --accent: #C5A55A;
-            --accent-light: #FDF8EE;
-            --text: #1A1A2E;
-            --text-muted: #5A5A72;
-            --bg: #FAFBFC;
+            --accent-light: #FFF8F0;
+            --accent-hover: #D4B76A;
+            --text: #333333;
+            --text-muted: #777777;
+            --text-light: #999999;
+            --bg: #FFF8F0;
             --white: #FFFFFF;
-            --border: #E2E5EA;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
-            --radius: 16px;
+            --border: #E8E0D4;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-lg: 0 16px 40px rgba(0,0,0,0.08);
+            --radius: 20px;
+            --radius-lg: 24px;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { -webkit-text-size-adjust: 100%; }
@@ -72,7 +76,7 @@
         /* HEADER */
         .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(27,46,92,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: none; z-index: 1000; }
         .nav { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
-        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; color: #FFFFFF; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; color: var(--primary); }
         .logo img { flex-shrink: 0; }
         .nav-links { display: flex; list-style: none; gap: 4px; }
         .nav-links a { display: block; padding: 8px 14px; font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.85); border-radius: 8px; transition: color 0.2s, background 0.2s; }
@@ -92,23 +96,23 @@
         .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; padding: 8px; color: var(--text-muted); }
 
         /* HERO — compact */
-        .hero { padding: 88px 24px 32px; background: linear-gradient(160deg, var(--primary-light) 0%, var(--white) 60%, var(--accent-light) 100%); text-align: center; }
+        .hero { padding: 88px 24px 32px; background: linear-gradient(160deg, var(--accent-light) 0%, var(--white) 60%, var(--primary-light) 100%); text-align: center; }
         .hero h1 { font-size: clamp(1.5rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
-        .hero h1 em { font-style: normal; color: var(--primary); }
+        .hero h1 em { font-style: normal; color: var(--accent); }
         .hero p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; }
 
         /* SERVICE CARDS */
         .services { padding: 28px 24px 40px; max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .svc { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 20px 24px; transition: box-shadow 0.25s, transform 0.25s; }
         .svc:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-        .svc-icon { width: 48px; height: 48px; background: var(--primary-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
-        .svc-icon svg { width: 24px; height: 24px; color: var(--primary); }
+        .svc-icon { width: 56px; height: 56px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .svc-icon svg { width: 28px; height: 28px; color: var(--accent); }
         .svc h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
         .svc p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; flex: 1; }
-        .svc-link { font-size: 0.88rem; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 4px; }
+        .svc-link { font-size: 0.88rem; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 4px; }
 
         /* FOOTER */
-        .footer { background: #1B2E5C; color: rgba(255,255,255,0.7); padding: 40px 24px 24px; margin-top: auto; }
+        .footer { background: var(--primary); color: rgba(255,255,255,0.7); padding: 40px 24px 24px; margin-top: auto; }
         .footer-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 28px; }
         .footer-brand .logo { color: var(--white); margin-bottom: 8px; }
         .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
@@ -171,6 +175,9 @@
         <h1>介護・薬局経営の課題を<br><em>現場目線</em>で解決</h1>
         <p>合同会社ハッピーベル — 埼玉県を拠点に関東エリア対応</p>
     </section>
+
+    <!-- Wave divider -->
+    <div style="margin-top:-1px;line-height:0;overflow:hidden;"><svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;display:block;"><path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,0 L0,0 Z" fill="#FFF8F0" opacity="0.5"/><path d="M0,30 C240,70 480,10 720,40 C960,70 1200,10 1440,30 L1440,0 L0,0 Z" fill="#FFF8F0"/></svg></div>
 
     <!-- Services -->
     <div class="services">
