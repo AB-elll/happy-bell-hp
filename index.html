@@ -110,7 +110,7 @@
         .wave-divider svg { width: 100%; height: 60px; display: block; }
 
         /* SERVICE CARDS */
-        .services { padding: 32px 24px 56px; max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .services { padding: 16px 24px 56px; max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .svc { display: flex; flex-direction: column; align-items: center; text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 24px 28px; transition: box-shadow 0.25s, transform 0.25s; }
         .svc:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
         .svc-icon { width: 56px; height: 56px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
@@ -158,7 +158,7 @@
         }
         @media (max-width: 480px) {
             .hero { padding: 108px 16px 48px; }
-            .services { padding: 24px 16px 40px; }
+            .services { padding: 12px 16px 40px; }
             .cta-section { padding: 56px 16px; }
             .btn { width: 100%; justify-content: center; }
         }
@@ -171,7 +171,7 @@
     <header class="header" role="banner">
         <nav class="nav" aria-label="メインナビゲーション">
             <a href="index.html" class="logo" aria-label="ハッピーベル トップページ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36" fill="none" aria-hidden="true" style="flex-shrink:0;"><path d="M18 4c-1.5 0-2.7 1.2-2.7 2.7v.8C11.5 8.7 8.5 12.3 8.5 16.5v6L6 25v1.5h24V25l-2.5-2.5v-6c0-4.2-3-7.8-6.8-9v-.8C20.7 5.2 19.5 4 18 4z" fill="#1B2E5C"/><circle cx="18" cy="31" r="3" fill="#1B2E5C"/><ellipse cx="18" cy="22.5" rx="1.8" ry="3" fill="#C5A55A"/><circle cx="14.5" cy="17" r="1.2" fill="#C5A55A"/><circle cx="21.5" cy="17" r="1.2" fill="#C5A55A"/><path d="M14.5 20.5q1.5 2 3.5 2t3.5-2" stroke="#C5A55A" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" fill="none" aria-hidden="true" style="flex-shrink:0;"><path d="M18 4c-1.5 0-2.7 1.2-2.7 2.7v.8C11.5 8.7 8.5 12.3 8.5 16.5v6L6 25v1.5h24V25l-2.5-2.5v-6c0-4.2-3-7.8-6.8-9v-.8C20.7 5.2 19.5 4 18 4z" fill="#1B2E5C"/><circle cx="18" cy="31" r="3" fill="#1B2E5C"/><ellipse cx="18" cy="22.5" rx="1.8" ry="3" fill="#C5A55A"/><circle cx="14.5" cy="17" r="1.2" fill="#C5A55A"/><circle cx="21.5" cy="17" r="1.2" fill="#C5A55A"/><path d="M14.5 20.5q1.5 2 3.5 2t3.5-2" stroke="#C5A55A" stroke-width="1" stroke-linecap="round" fill="none"/></svg>
                 ハッピーベル
             </a>
             <ul class="nav-links" role="list">
@@ -239,15 +239,6 @@
         </a>
     </div>
 
-    <!-- CTA -->
-    <section class="cta-section">
-        <h2 class="animate">お気軽にご相談ください</h2>
-        <p class="animate">初回相談は無料です。どんな小さなお悩みでもお聞かせください。</p>
-        <div class="animate">
-            <a href="contact.html" class="btn btn-primary">お問い合わせはこちら</a>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="footer-inner">
@@ -280,21 +271,13 @@
         </div>
     </footer>
 
-    <button class="scroll-top" aria-label="ページ上部に戻る">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-    </button>
-
     <script>
     (function() {
         'use strict';
         var header = document.querySelector('.header');
-        var scrollTopBtn = document.querySelector('.scroll-top');
         window.addEventListener('scroll', function() {
-            var y = window.pageYOffset;
-            header.classList.toggle('scrolled', y > 50);
-            scrollTopBtn.classList.toggle('visible', y > 400);
+            header.classList.toggle('scrolled', window.pageYOffset > 50);
         }, { passive: true });
-        scrollTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
         var hamburger = document.querySelector('.hamburger');
         var overlay = document.querySelector('.mobile-overlay');
