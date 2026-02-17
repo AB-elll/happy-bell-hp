@@ -122,7 +122,9 @@
         @media (max-width: 768px) {
             .nav-links, .nav .nav-cta { display: none; }
             .hamburger { display: block; }
-            .mobile-overlay, .mobile-menu { display: block; }
+            .mobile-overlay { display: block; pointer-events: none; }
+            .mobile-overlay.active { pointer-events: auto; }
+            .mobile-menu { display: block; }
             .services { grid-template-columns: 1fr; max-width: 400px; }
             .footer-inner { grid-template-columns: 1fr; gap: 24px; }
         }
